@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELORA | Premium Natural Skincare</title>
+<style>
+:root{--green:#173f32;--gold:#b99a61;--cream:#f8f4eb;--white:#fffdf8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--green);font-family:Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fffdf8ed;backdrop-filter:blur(10px);padding:17px 6%;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #e9e0d1}
+.logo{font: bold 30px Georgia,serif;letter-spacing:4px}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a,a{color:inherit;text-decoration:none}
+nav a{font-size:13px}
+nav a:hover{color:var(--gold)}
+button{background:var(--green);color:white;border:0;padding:12px 18px;border-radius:5px;cursor:pointer;transition:.2s}
+button:hover{background:#285b47;transform:translateY(-1px)}
+.hero{min-height:350px;padding:65px 9%;display:flex;align-items:center;background:linear-gradient(90deg,#e9ddc9ed,#e9ddc980),url('https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1800&q=85') center/cover}
+.hero-content{max-width:540px}
+.eyebrow{letter-spacing:4px;font-size:11px;font-weight:bold}
+h1{font:normal 49px Georgia,serif;line-height:1.12;margin:16px 0}
+h1 em{font-style:italic}
+.hero p{line-height:1.8}
+section{padding:45px 8%}
+.section-head{text-align:center;margin-bottom:25px}
+.section-head p{font-size:11px;letter-spacing:3px}
+h2{font:normal 30px Georgia,serif}
+.product-layout{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center;max-width:1050px;margin:auto}
+.product-photo{height:390px;position:relative;overflow:hidden;border-radius:9px;background:#e8ddc9}
+.product-photo img{width:100%;height:100%;object-fit:cover}
+.product-label{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);background:#f5ead6ed;color:#31493b;width:53%;padding:20px 8px;text-align:center;border:1px solid #c0a774;box-shadow:0 5px 18px #0002}
+.product-label strong{display:block;font:24px Georgia,serif;letter-spacing:3px}
+.product-label span{font:11px Georgia,serif;display:block;margin-top:9px}
+.product-info h2{margin-bottom:8px}
+.product-info p{line-height:1.8;color:#5c675e}
+.price{font:bold 28px Georgia,serif;color:var(--green)!important}
+.controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.controls select{width:75px}
+select,input,textarea{font:inherit;padding:12px;border:1px solid #d9d1c4;border-radius:5px;background:#fffdf9;color:#253f34}
+.benefits{background:#f0eadf;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center;padding:25px 8%}
+.benefits div{font-size:13px;line-height:1.8}
+.benefits strong{display:block;font-family:Georgia,serif;font-size:16px}
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.why div{background:#fffdf8;border:1px solid #e9e0d1;padding:22px 15px;border-radius:8px;text-align:center}
+.why span{font-size:27px}
+.why h3{font:18px Georgia,serif}
+.why p{font-size:13px;line-height:1.7;color:#69746c}
+.founder{background:#eee5d5;text-align:center;line-height:1.8}
+.founder h2{margin-bottom:6px}
+.founder h3{font:24px Georgia,serif}
+.founder p{max-width:680px;margin:12px auto}
+.order-area{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:950px;margin:auto}
+.order-area form{display:flex;flex-direction:column;gap:8px}
+.summary{padding:25px;background:#edf1e8;border-radius:8px;align-self:start}
+.summary p{line-height:1.8}
+footer{background:var(--green);color:white;padding:32px 8%;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;line-height:1.8}
+footer a{color:#e5d6b9}
+.small{font-size:12px;color:#777}
+#chatButton{position:fixed;right:20px;bottom:20px;border-radius:50%;height:56px;width:56px;font-size:23px;z-index:10;box-shadow:0 4px 16px #0002}
+#chat{display:none;position:fixed;right:18px;bottom:88px;width:min(355px,94vw);height:440px;background:white;border:1px solid #ddd;border-radius:12px;box-shadow:0 8px 35px #0002;z-index:10;overflow:hidden}
+.chat-head{background:var(--green);color:white;padding:15px;font-weight:bold;display:flex;justify-content:space-between}
+#messages{height:325px;overflow-y:auto;padding:12px;font-size:13px}
+.msg{background:#f1eee7;padding:10px 12px;border-radius:10px;margin:8px 0;line-height:1.6;overflow-wrap:anywhere}
+.msg.user{background:#dcefe2;text-align:right}
+.chat-input{display:flex;gap:6px;padding:8px}
+.chat-input input{width:100%;min-width:0}
+#adminPanel{display:none;position:fixed;z-index:20;top:50%;left:50%;transform:translate(-50%,-50%);width:min(520px,94vw);max-height:85vh;overflow:auto;background:white;border:1px solid var(--gold);border-radius:12px;padding:22px;box-shadow:0 10px 80px #0006}
+#adminPanel input{width:100%;margin:8px 0}
+.admin-top{display:flex;justify-content:space-between;align-items:center}
+.order-card{border-top:1px solid #ddd;padding:12px 0;overflow-wrap:anywhere;font-size:13px;line-height:1.7}
+#adminOverlay{display:none;position:fixed;inset:0;background:#14241c88;z-index:19}
+@media(max-width:700px){
+ header{padding:14px 5%;flex-direction:column}
+ nav{justify-content:center;gap:13px}
+ .hero{padding:48px 7%;background-position:center}
+ h1{font-size:38px}
+ section{padding:35px 5%}
+ .product-layout,.order-area{grid-template-columns:1fr}
+ .product-photo{height:300px}
+ .benefits{grid-template-columns:repeat(2,1fr)}
+ .why{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#home" class="logo">VELORA<span style="color:#b99a61">.</span></a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#why">Why VELORA</a>
+    <a href="#founder">Founder</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<div class="hero" id="home">
+  <div class="hero-content">
+    <div class="eyebrow">NATURAL SKINCARE</div>
+    <h1>Care for your skin.<br><em>Come back to you.</em></h1>
+    <p>Thoughtful skincare. Simple rituals.<br>Make a little time for yourself with VELORA.</p>
+    <a href="#shop"><button>SHOP NOW &nbsp; →</button></a>
+  </div>
+</div>
+
+<div class="benefits">
+  <div>🌿<strong>Thoughtful Care</strong>Everyday skincare rituals</div>
+  <div>✧<strong>Simple Routine</strong>Care made uncomplicated</div>
+  <div>♡<strong>Gentle Approach</strong>Patch test before use</div>
+  <div>❋<strong>Made with Care</strong>Feel good in your routine</div>
+</div>
+
+<section id="shop">
+  <div class="section-head">
+    <p>THE VELORA ESSENTIAL</p>
+    <h2>Our Featured Product</h2>
+  </div>
+  <div class="product-layout">
+    <div class="product-photo">
+      <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1000&q=85" alt="Skincare product setting">
+      <div class="product-label">
+        <strong>VELORA</strong>
+        <span>FACE SCRUB</span>
+        <span>Natural • Gentle • Effective</span>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="eyebrow">NATURAL SKINCARE</div>
+      <h2>Face Scrub</h2>
+      <p>A skincare essential for your self-care routine. Designed for gentle exfoliation. Avoid the eye area, follow the packaging instructions and patch test before use.</p>
+      <p class="price">Rs. 1,999</p>
+      <div class="controls">
+        <label for="qty">Quantity</label>
+        <select id="qty" onchange="updatePrice()">
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3">3</option><option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button onclick="addToCart()">ADD TO CART</button>
+        <a href="#order"><button>BUY NOW</button></a>
+      </div>
+      <p id="cartMessage">Your cart is empty.</p>
+      <p class="small">Please confirm product ingredients and instructions on the actual packaging.</p>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="background:#f0eadf">
+  <div class="section-head">
+    <p>THE VELORA DIFFERENCE</p>
+    <h2>Why VELORA?</h2>
+  </div>
+  <div class="why">
+    <div><span>🌿</span><h3>Thoughtful Skincare</h3><p>A simple approach to your everyday routine.</p></div>
+    <div><span>♡</span><h3>Self-Care</h3><p>Make a little time for yourself each day.</p></div>
+    <div><span>✧</span><h3>Simple Rituals</h3><p>Keep your skincare routine uncomplicated.</p></div>
+    <div><span>❋</span><h3>Care First</h3><p>Read instructions and choose products suited to your skin.</p></div>
+  </div>
+</section>
+
+<section class="founder" id="founder">
+  <p class="eyebrow">THE PERSON BEHIND THE BRAND</p>
+  <h2>Meet Our Founder</h2>
+  <h3>Abu Umama Yousafzai</h3>
+  <p>VELORA's founder is Abu Umama Yousafzai. The brand's vision is to make skincare feel simple, thoughtful and personal, bringing care and confidence into everyday routines.</p>
+  <p><em>“Real care begins with the little things.”</em></p>
+</section>
+
+<section id="order">
+  <div class="section-head">
+    <p>YOUR SELF-CARE JOURNEY</p>
+    <h2>Place Your Order</h2>
+  </div>
+  <div class="order-area">
+    <form id="orderForm">
+      <input id="customer" placeholder="Full Name" required>
+      <input id="phone" type="tel" placeholder="Phone Number" required>
+      <textarea id="address" placeholder="Complete Delivery Address" rows="3" required></textarea>
+      <label for="orderQty">Quantity</label>
+      <select id="orderQty" onchange="updateOrderTotal()">
+        <option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <p id="orderTotal">Total: Rs. 1,999</p>
+      <button type="submit">SUBMIT ORDER</button>
+      <p class="small">Demo only: this form saves the order in this browser. It does not send it to VELORA.</p>
+    </form>
+    <div class="summary">
+      <h3>Order Summary</h3>
+      <p>🌿 &nbsp; Face Scrub</p>
+      <p>Price: Rs. 1,999</p>
+      <p id="summaryQty">Quantity: 1</p>
+      <hr>
+      <strong id="summaryTotal">Total: Rs. 1,999</strong>
+      <p class="small">Thank you for choosing VELORA.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="text-align:center;background:#f0eadf">
+  <p class="eyebrow">LET'S CONNECT</p>
+  <h2>Follow VELORA</h2>
+  <p>For brand updates and product questions, visit our Instagram page.</p>
+  <a href="https://www.instagram.com/velora_personal_care/" target="_blank" rel="noopener">
+    <button>VISIT INSTAGRAM ↗</button>
+  </a>
+</section>
+</main>
+
+<footer>
+  <div><div class="logo">VELORA.</div>Natural skincare, made personal.</div>
+  <div><a href="#home">Home</a> &nbsp; <a href="#shop">Shop</a> &nbsp; <a href="#founder">Founder</a></div>
+  <div>Instagram<br><a href="https://www.instagram.com/velorapersonalcare/" target="_blank" rel="noopener">@velorapersonalcare</a></div>
+  <div class="small" style="color:#eee;width:100%">© 2026 VELORA. All rights reserved.</div>
+</footer>
+
+<button id="chatButton" onclick="toggleChat()" aria-label="Open VELORA Assistant">✦</button>
+<div id="chat">
+  <div class="chat-head">
+    <span>✦ VELORA Assistant</span>
+    <button onclick="toggleChat()" style="padding:4px 9px">×</button>
+  </div>
+  <div id="messages">
+    <div class="msg">Assalam-o-Alaikum! Welcome to VELORA. Ask me about our founder, product, how it works, how to use it, price or orders.</div>
+  </div>
+  <div class="chat-input">
+    <input id="chatText" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<div id="adminOverlay" onclick="closeAdmin()"></div>
+<div id="adminPanel">
+  <div class="admin-top">
+    <h2>VELORA Admin</h2>
+    <button onclick="closeAdmin()">×</button>
+  </div>
+  <div id="adminLogin">
+    <p>Authorized access only.</p>
+    <form onsubmit="loginAdmin(event)">
+      <input id="adminPassword" type="password" placeholder="Admin Password" required>
+      <button type="submit" style="width:100%">LOGIN</button>
+    </form>
+    <p class="small">Demo password is set inside this HTML file.</p>
+  </div>
+  <div id="adminContent" style="display:none">
+    <h3>Saved Orders</h3>
+    <p class="small">Orders stored in this browser only.</p>
+    <button onclick="showOrders()">REFRESH</button>
+    <button onclick="logoutAdmin()">LOG OUT</button>
+    <div id="ordersList"></div>
+  </div>
+</div>
+
+<script>
+const PRICE=1999;
+const ADMIN_PASSWORD="VELORA2026";
+let cartQuantity=0;
+
+function money(n){return "Rs. "+Number(n).toLocaleString("en-PK")}
+
+function updatePrice(){
+  const q=Number(document.getElementById("qty").value);
+  document.getElementById("cartMessage").textContent=
+    "Selected: "+q+" Face Scrub(s) — "+money(q*PRICE);
+}
+function addToCart(){
+  cartQuantity+=Number(document.getElementById("qty").value);
+  document.getElementById("cartMessage").textContent=
+    "Cart: "+cartQuantity+" item(s) — "+money(cartQuantity*PRICE);
+}
+function updateOrderTotal(){
+  const q=Number(document.getElementById("orderQty").value);
+  document.getElementById("orderTotal").textContent="Total: "+money(q*PRICE);
+  document.getElementById("summaryQty").textContent="Quantity: "+q;
+  document.getElementById("summaryTotal").textContent="Total: "+money(q*PRICE);
+}
+
+function getOrders(){
+  try{return JSON.parse(localStorage.getItem("veloraOrders")||"[]")}
+  catch(e){return []}
+}
+
+document.getElementById("orderForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  const q=Number(document.getElementById("orderQty").value);
+  const orders=getOrders();
+  orders.unshift({
+    id:Date.now(),
+    name:document.getElementById("customer").value.trim(),
+    phone:document.getElementById("phone").value.trim(),
+    address:document.getElementById("address").value.trim(),
+    quantity:q,total:q*PRICE,date:new Date().toLocaleString()
+  });
+  try{
+    localStorage.setItem("veloraOrders",JSON.stringify(orders));
+    alert("Demo order saved in this browser only. VELORA has NOT received it.");
+    this.reset();
+    updateOrderTotal();
+  }catch(err){
+    alert("Could not save the order in this browser.");
+  }
+});
+
+function toggleChat(){
+  const c=document.getElementById("chat");
+  c.style.display=c.style.display==="block"?"none":"block";
+}
+function addMessage(text,cls){
+  const d=document.createElement("div");
+  d.className="msg "+(cls||"");
+  d.textContent=text;
+  const m=document.getElementById("messages");
+  m.appendChild(d);
+  m.scrollTop=m.scrollHeight;
+}
+function answer(input){
+  const q=input.toLowerCase();
+
+  if(/founder|owner|abu umama|yousafzai|who started|who created/.test(q))
+    return "The founder of VELORA is Abu Umama Yousafzai. The brand aims to make skincare feel simple, thoughtful and personal.";
+
+  if(/how.*(use|apply)|use.*scrub|apply.*scrub|directions/.test(q))
+    return "How to use a face scrub: 1) Read the product packaging instructions. 2) Wet your face if the label says to. 3) Apply gently without harsh rubbing. 4) Avoid the eye area. 5) Rinse as directed. Patch test first and stop if irritation occurs. Follow the actual product label if it differs.";
+
+  if(/how.*work|work.*scrub|what.*scrub.*do|benefit/.test(q))
+    return "A face scrub is an exfoliating skincare product intended to help remove dead surface skin cells through gentle cleansing or exfoliation. Results vary by skin type and formula. Use only as directed on the VELORA packaging and avoid over-scrubbing.";
+
+  if(/price|cost|how much|rate|rupee/.test(q))
+    return "The VELORA Face Scrub is listed on this website at Rs. 1,999. Please check the official Instagram page for updated prices and offers.";
+
+  if(/ingredient|what.*inside|formula|organic|vegan|cruelty/.test(q))
+    return "I don't have a verified complete ingredient list or certification details. Please read the product packaging or contact VELORA directly before relying on ingredient or certification claims.";
+
+  if(/founder.*picture|founder.*photo/.test(q))
+    return "The founder's name is Abu Umama Yousafzai. This website displays his name only, without a founder photograph.";
+
+  if(/order|delivery|ship|address|cash on delivery|payment/.test(q))
+    return "You can complete the order form on this page. This HTML demo saves orders in the current browser only; it does not notify the business or arrange delivery. Contact VELORA through Instagram to confirm a real order.";
+
+  if(/instagram|contact|social|follow/.test(q))
+    return "Follow VELORA on Instagram: https://www.instagram.com/velora_personal_care/";
+
+  if(/skin type|sensitive|acne|pimple|rash|irritat|medical/.test(q))
+    return "Skin needs vary. Check the product label and patch test first. Avoid using a scrub on irritated or broken skin, and ask a dermatologist if you have a skin condition or experience a reaction.";
+
+  if(/hello|hi\b|salam|assalam|hey/.test(q))
+    return "Assalam-o-Alaikum! Welcome to VELORA. You can ask about our founder, face scrub, how to use it, how it works, price or contact details.";
+
+  if(/thank/.test(q))
+    return "You're welcome! Thank you for your interest in VELORA.";
+
+  return "I'm the VELORA website assistant. I can help with the founder Abu Umama Yousafzai, face scrub price, how it works, how to use it, orders and Instagram. For details not confirmed here, contact VELORA: https://www.instagram.com/velora_personal_care/";
+}
+function sendChat(){
+  const input=document.getElementById("chatText");
+  const text=input.value.trim();
+  if(!text)return;
+  addMessage(text,"user");
+  input.value="";
+  addMessage(answer(text));
+}
+
+/* #admin in the address bar opens the hidden password panel */
+function openAdmin(){
+  document.getElementById("adminOverlay").style.display="block";
+  document.getElementById("adminPanel").style.display="block";
+  document.getElementById("adminLogin").style.display="block";
+  document.getElementById("adminContent").style.display="none";
+  document.getElementById("adminPassword").value="";
+}
+function closeAdmin(){
+  document.getElementById("adminOverlay").style.display="none";
+  document.getElementById("adminPanel").style.display="none";
+  if(location.hash==="#admin"){
+    history.replaceState(null,"",location.pathname+location.search);
+  }
+}
+function loginAdmin(e){
+  e.preventDefault();
+  if(document.getElementById("adminPassword").value===ADMIN_PASSWORD){
+    document.getElementById("adminLogin").style.display="none";
+    document.getElementById("adminContent").style.display="block";
+    showOrders();
+  }else{
+    alert("Incorrect admin password.");
+  }
+}
+function logoutAdmin(){
+  document.getElementById("adminContent").style.display="none";
+  document.getElementById("adminLogin").style.display="block";
+  document.getElementById("adminPassword").value="";
+}
+function showOrders(){
+  const box=document.getElementById("ordersList");
+  box.replaceChildren();
+  const orders=getOrders();
+  if(!orders.length){
+    box.textContent="No orders saved in this browser.";
+    return;
+  }
+  orders.forEach(o=>{
+    const d=document.createElement("div");
+    d.className="order-card";
+    const title=document.createElement("strong");
+    title.textContent="Order #"+o.id;
+    const details=document.createElement("p");
+    details.textContent=o.date+" | "+o.name+" | "+o.phone+" | "+o.address+
+      " | Quantity: "+o.quantity+" | Total: "+money(o.total);
+    const del=document.createElement("button");
+    del.textContent="Delete Order";
+    del.onclick=function(){
+      localStorage.setItem("veloraOrders",JSON.stringify(getOrders().filter(x=>x.id!==o.id)));
+      showOrders();
+    };
+    d.append(title,details,del);
+    box.appendChild(d);
+  });
+}
+
+/* Automatically open login when URL hash is #admin */
+function checkAdminHash(){
+  if(location.hash.toLowerCase()==="#admin")openAdmin();
+}
+window.addEventListener("hashchange",checkAdminHash);
+checkAdminHash();
+</script>
+</body>
+</html>
